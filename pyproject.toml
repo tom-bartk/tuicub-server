@@ -1,0 +1,165 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tuicubserver"
+dynamic = ["version"]
+description = "Back-end for tuicub - online multiplayer board game in your terminal."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+keywords = []
+authors = [{ name = "tombartk", email = "tom.bartk@proton.me" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Framework :: Flask",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Games/Entertainment :: Board Games",
+  "Typing :: Typed",
+]
+
+dependencies = [
+  "attrs==22.2.0",
+  "Flask==3.0.0",
+  "marshmallow==3.19.0",
+  "marshmallow-generic==1.0.1",
+  "more-itertools==10.1.0",
+  "psycopg2==2.9.9",
+  "requests==2.31.0",
+  "structlog==23.2.0",
+  "SQLAlchemy==2.0.22",
+  "theine==0.4.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/tom-bartk/tuicubserver"
+Issues = "https://github.com/tom-bartk/tuicubserver/issues"
+Source = "https://github.com/tom-bartk/tuicubserver"
+
+[project.scripts]
+tuicubserver = "tuicubserver.tuicubserver:main"
+
+[tool.hatch.version]
+path = "src/tuicubserver/__about__.py"
+
+[tool.black]
+target-version = ["py311"]
+line-length = 90
+exclue = ["noxfile.py"]
+
+[tool.mypy]
+exclude = ["^noxfile\\.py$"]
+
+[tool.interrogate]
+ignore-init-module = true
+ignore-magic = true
+ignore-semiprivate = true
+ignore-private = true
+ignore-module = true
+ignore-nested-functions = true
+ignore-nested-classes = true
+ignore-regex = [".*Error.*", ".*serialize.*"]
+verbose = 1
+exclude = [
+  "res",
+  "src/tuicubserver/events/events.py",
+  "tests",
+  ".nox",
+  ".venv",
+  "noxfile.py",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 90
+ignore = [
+  "ANN101",
+  "ANN102",
+  "ANN401",
+  "ANN204",
+  "ARG001",
+  "ARG002",
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "D105",
+  "D106",
+  "D107",
+  "RUF001",
+  "PLR0913",
+]
+unfixable = []
+select = [
+  "D",
+  "E",
+  "F",
+  "I",
+  "N",
+  "W",
+  "C4",
+  "PT",
+  "UP",
+  "ANN",
+  "ARG",
+  "C90",
+  "PLE",
+  "PLR",
+  "PLW",
+  "RUF",
+  "SIM",
+  "SLF",
+  "TRY",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402"]
+"tests/**/*" = [
+  "ANN001",
+  "ANN002",
+  "ANN003",
+  "ANN201",
+  "ANN202",
+  "PLR2004",
+  "S101",
+  "SIM117",
+  "TID252",
+]
+
+[tool.ruff.isort]
+known-first-party = ["tuicubserver"]
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.coverage.run]
+source_pkgs = ["src/"]
+parallel = true
+omit = [
+  "src/tuicubserver/__about__.py",
+  "src/tuicubserver/tuicubserver.py",
+  "src/tuicubserver/__main__.py",
+]
+
+[tool.coverage.paths]
+source = ["src/"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "return NotImplemented",
+  "def error_name",
+]

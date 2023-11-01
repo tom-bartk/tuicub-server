@@ -1,0 +1,13 @@
+[db]
+url ="postgresql+psycopg2://postgres:postgres@localhost:5432/tuicub"
+
+[logging]
+logfile = "/tmp/tuicubserver.log"
+
+[messages]
+host = "api.tuicub.com"
+port = 23433
+secret = "change_me"
+
+[events]
+secret = "change_me"

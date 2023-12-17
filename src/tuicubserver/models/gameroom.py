@@ -19,7 +19,7 @@ class Gameroom:
     Attributes:
         id (uuid.UUID): The id of the gameroom.
         name (str): The name of the gameroom.
-        owner_id (uuid.UUID): The id the gameroom that the game belongs to.
+        owner_id (uuid.UUID): The id of the user that the gameroom belongs to.
         users (tuple[User, ...]): Users that joined this gameroom, including the owner.
         created_at (datetime.datetime): The gameroom's date of creation.
         game (Game | None): An optional game started in this gameroom.
